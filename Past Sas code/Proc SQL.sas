@@ -1,4 +1,4 @@
-%let root =/home/u49757561/my_shared_file_links/pearsoro0/STA318;
+%let root =/home/u49757561/my_shared_file_links/data;
 libname orion "&root/Orion";
 title "Orion Sales Data"; 
 
@@ -55,13 +55,3 @@ select employee_id, name, job_title
 	left join orion.employees E on O.employee_id;
 	order by employee_id;
 run;
-
-
-
-
-
-
-
-
-
-
