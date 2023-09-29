@@ -1,11 +1,11 @@
 ********************************************************;
-** HW5 - Rosebowl
+** Rosebowl
 ** Ryan Iacovone
 ********************************************************;
 
 ** Define macro variables ROOT and OUTPATH;
-%let root =/home/u49757561/my_shared_file_links/pearsoro0/STA318;
-%let outpath = /home/u49757561/my318/Output;
+%let root =/home/u49757561/my_shared_file_links/data;
+%let outpath = /home/u49757561/Output;
 
 PROC IMPORT DATAFILE="&root/MoreData/RoseBowl.csv" 
 		DBMS=csv OUT=rose_raw REPLACE;
