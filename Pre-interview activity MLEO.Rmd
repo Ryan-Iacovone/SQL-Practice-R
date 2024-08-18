@@ -50,6 +50,41 @@ sqldf("SELECT County, SUM(Claim_Info.Amount_Paid) AS 'Sum of Amount Paid'
        ORDER BY County desc")
 ```
 
+## Subqueries 
+
+```{r}
+# find the Claim_ID or name and Amount_Paid for all claims where the Amount_Paid is greater than the average Amount_Paid in the county "Wayne."
+# from statement is run first with the alias so need to update alias in select statement
+
+
+# Subqueries in conditional logic
+sqldf("SELECT *
+      FROM tutorial.sf_crime_incidents_2014_01
+      WHERE Date = (SELECT MIN(date)
+                 FROM tutorial.sf_crime_incidents_2014_01")
+
+sqldf("SELECT Claim_ID, Amount_Paid 
+      FROM Claim_Info 
+      WHERE Amount_Paid > 
+          (SELECT AVG(ci.Amount_Paid) 
+          FROM Claim_Info ci
+          JOIN Claimant_Info cmi ON ci.Claimant_ID = cmi.Claimant_ID 
+          WHERE cmi.County = 'Wayne')")
+
+sqldf("SELECT cmi.Name, ci.Amount_Paid 
+      FROM Claim_Info ci
+      JOIN Claimant_Info cmi ON ci.Claimant_ID = cmi.Claimant_ID 
+      WHERE ci.Amount_Paid > 
+          (SELECT AVG(sub_ci.Amount_Paid) 
+          FROM Claim_Info sub_ci
+          JOIN Claimant_Info sub_cmi ON sub_ci.Claimant_ID = sub_cmi.Claimant_ID 
+          WHERE sub_cmi.County = 'Wayne')")
+```
+
+
+
+
+
 
 
 
